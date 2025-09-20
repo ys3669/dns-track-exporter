@@ -1,0 +1,25 @@
+# DNS Trace Exporter Configuration
+server:
+  port: 9653
+
+monitoring:
+  interval: 30s  # DNS resolution interval
+  timeout: 10s   # DNS query timeout
+
+dns_servers:
+  - name: "google"
+    address: "8.8.8.8"
+  - name: "cloudflare"
+    address: "1.1.1.1"
+  - name: "quad9"
+    address: "9.9.9.9"
+
+targets:
+  - fqdn: "google.com"
+    record_types: ["A", "AAAA"]
+  - fqdn: "example.com"
+    record_types: ["A"]
+  - fqdn: "github.com"
+    record_types: ["A", "AAAA"]
+  - fqdn: "cloudflare.com"
+    record_types: ["A"]
