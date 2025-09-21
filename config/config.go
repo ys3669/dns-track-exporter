@@ -10,10 +10,10 @@ import (
 
 // Config represents the application configuration
 type Config struct {
-	Server     ServerConfig   `yaml:"server"`
-	Monitoring MonitorConfig  `yaml:"monitoring"`
-	DNSServers []DNSServer    `yaml:"dns_servers"`
-	Targets    []Target       `yaml:"targets"`
+	Server     ServerConfig  `yaml:"server"`
+	Monitoring MonitorConfig `yaml:"monitoring"`
+	DNSServers []DNSServer   `yaml:"dns_servers"`
+	Targets    []Target      `yaml:"targets"`
 }
 
 // ServerConfig contains HTTP server configuration

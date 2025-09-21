@@ -73,7 +73,6 @@ func init() {
 	customRegistry.MustRegister(dnsResolvedIpAddress)
 }
 
-
 func main() {
 	// Parse command line flags
 	configFile := flag.String("config", "config.yaml", "Path to configuration file")

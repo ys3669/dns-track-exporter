@@ -3,6 +3,7 @@ package dns
 import (
 	"context"
 	"net"
+	"strings"
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -10,13 +11,13 @@ import (
 
 // Result represents DNS resolution result
 type Result struct {
-	FQDN        string
-	RecordType  string
-	DNSServer   string
-	IPs         []net.IPAddr
-	Duration    time.Duration
-	Success     bool
-	Error       error
+	FQDN       string
+	RecordType string
+	DNSServer  string
+	IPs        []net.IPAddr
+	Duration   time.Duration
+	Success    bool
+	Error      error
 }
 
 // Resolver handles DNS resolution with metrics
@@ -52,6 +53,10 @@ func (r *Resolver) Lookup(fqdn, dnsServer, recordType string, timeout time.Durat
 				Timeout: time.Second * 5,
 			}
 			if dnsServer != "" {
+				// Handle IPv6 addresses by wrapping them in brackets
+				if strings.Contains(dnsServer, ":") && !strings.HasPrefix(dnsServer, "[") {
+					dnsServer = "[" + dnsServer + "]"
+				}
 				return d.DialContext(ctx, network, dnsServer+":53")
 			}
 			return d.DialContext(ctx, network, address)
